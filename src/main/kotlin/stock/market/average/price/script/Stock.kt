@@ -23,4 +23,6 @@ data class Stock(
         this.quantity += quantity
         this.totalValue += value
     }
+
+    fun simpleStockName(): String = name.split("-").first().trim()
 }
