@@ -14,12 +14,12 @@ fun fetch(): Set<Stock> {
             .getSheetAt(0)
             .drop(1)
             .filter {
-                val purchase = "Compra"
-                it.getCell(1)?.stringCellValue == purchase
+                it.getCell(0)?.stringCellValue == "Credito"
+                        && it.getCell(2)?.stringCellValue == "Transferência - Liquidação"
             }.forEach { row ->
-                val stockName = row.getCell(5)?.stringCellValue ?: return@forEach
-                val quantity = row.getCell(6).numericCellValue.toInt()
-                val valuePaid = row.getCell(8).numericCellValue.toBigDecimal()
+                val stockName = row.getCell(3)?.stringCellValue ?: return@forEach
+                val quantity = row.getCell(5).numericCellValue.toInt()
+                val valuePaid = row.getCell(7).numericCellValue.toBigDecimal()
 
                 stocks
                     .getOrPut(stockName) { Stock(name = stockName) }
