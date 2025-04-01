@@ -12,7 +12,7 @@ private val stocks = mutableMapOf<String, Stock>()
 
 fun main() =
     fetchInputStream()
-        .fetchDataLines()
+        .dataLines()
         .filter { it.isPurchaseOperation() }
         .filterNotNull()
         .forEach { it.computeStockPurchaseOperation() }
@@ -45,7 +45,7 @@ private fun Row.computeStockPurchaseOperation() {
 
 fun fetchInputStream() = FileInputStream(sheetPath())
 
-private fun FileInputStream.fetchDataLines(): List<Row?> =
+private fun FileInputStream.dataLines(): List<Row?> =
     XSSFWorkbook(this)
         .getSheetAt(0)
         .drop(1)
